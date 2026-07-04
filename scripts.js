@@ -117,4 +117,115 @@ $(document).ready(function () {
   if ($('#latest-videos').length) {
     loadVideoCarousel('https://smileschool-api.hbtn.info/latest-videos', '#latest-videos');
   }
+
+  // ========= COURSES (Task 5) =========
+  if ($('.search-result').length) {
+    const state = { q: '', topic: 'all', sort: 'most_popular' };
+
+    function capitalize(s) {
+      return s.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    }
+
+    function buildCourseCard(course) {
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        const src = i < course.star ? './images/star_on.png' : './images/star_off.png';
+        stars += `<img src="${src}" width="15" height="15" alt="">`;
+      }
+      return `
+        <div class="card col-md-3 col-sm-4 col-12 my-3" style="width: 16rem;">
+          <div class="d-flex align-items-center justify-content-center">
+            <img src="${course.thumb_url}" class="card-img-top" alt="thumbnail" />
+            <img src="./images/play.png" class="position-absolute iconPlay" alt="play" />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-left">${course.title}</h5>
+            <p class="card-text text-muted text-left">${course['sub-title'] || ''}</p>
+            <div class="d-flex align-items-center">
+              <img src="${course.author_pic_url}" alt="author" width="30" height="30" class="rounded-circle">
+              <h6 class="pl-2 m-0 text-purple">${course.author}</h6>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <div class="d-flex">${stars}</div>
+              <span class="text-purple">${course.duration}</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function fetchCourses() {
+      const results = $('.search-result');
+      results.html('<div class="loader mx-auto my-5"></div>');
+      $.ajax({
+        url: 'https://smileschool-api.hbtn.info/courses',
+        method: 'GET',
+        data: { q: state.q, topic: state.topic, sort: state.sort },
+        success: function (data) {
+          // update results count
+          $('p.text-secondary').first().text(data.courses.length + ' videos');
+          results.empty();
+          data.courses.forEach(function (course) {
+            results.append(buildCourseCard(course));
+          });
+        }
+      });
+    }
+
+    // Populate dropdowns + init search once on first load
+    $.ajax({
+      url: 'https://smileschool-api.hbtn.info/courses',
+      method: 'GET',
+      success: function (data) {
+        // init search value
+        $('#key-search').val(data.q);
+        state.q = data.q;
+
+        // TOPIC dropdown
+        const topicMenu = $('#topic').closest('.input-box').find('.dropdown-menu');
+        topicMenu.empty();
+        data.topics.forEach(function (t) {
+          topicMenu.append(`<a class="dropdown-item" data-value="${t}">${capitalize(t)}</a>`);
+        });
+        $('#topic').text(capitalize(data.topic));
+        state.topic = data.topic;
+
+        // SORT dropdown
+        const sortMenu = $('#sortby').closest('.input-box').find('.dropdown-menu');
+        sortMenu.empty();
+        data.sorts.forEach(function (s) {
+          sortMenu.append(`<a class="dropdown-item" data-value="${s}">${capitalize(s)}</a>`);
+        });
+        $('#sortby').text(capitalize(data.sort));
+        state.sort = data.sort;
+
+        // initial course render
+        $('p.text-secondary').first().text(data.courses.length + ' videos');
+        const results = $('.search-result');
+        results.empty();
+        data.courses.forEach(function (course) {
+          results.append(buildCourseCard(course));
+        });
+
+        // ---- events ----
+        topicMenu.on('click', '.dropdown-item', function () {
+          state.topic = $(this).data('value');
+          $('#topic').text($(this).text());
+          fetchCourses();
+        });
+
+        sortMenu.on('click', '.dropdown-item', function () {
+          state.sort = $(this).data('value');
+          $('#sortby').text($(this).text());
+          fetchCourses();
+        });
+
+        let searchTimer;
+        $('#key-search').on('input', function () {
+          state.q = $(this).val();
+          clearTimeout(searchTimer);
+          searchTimer = setTimeout(fetchCourses, 300);
+        });
+      }
+    });
+  }
 });
