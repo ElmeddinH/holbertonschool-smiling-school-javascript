@@ -112,4 +112,9 @@ $(document).ready(function () {
   if ($('#popular-tutorials').length) {
     loadVideoCarousel('https://smileschool-api.hbtn.info/popular-tutorials', '#popular-tutorials');
   }
+
+  // ========= LATEST VIDEOS (Task 3) =========
+  if ($('#latest-videos').length) {
+    loadVideoCarousel('https://smileschool-api.hbtn.info/latest-videos', '#latest-videos');
+  }
 });
