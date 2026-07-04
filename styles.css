@@ -1,0 +1,204 @@
+/* HOME PAGE */
+
+/* hero section */
+.hero-img {
+    background-image: url("/images/pic_1.jpg");
+    height: 1440px;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+}
+
+.button {
+    background-color: #C271FF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 22px;
+    margin: 0;
+    position: absolute;
+    top: 5=10%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 0.9;
+}
+
+.button:hover {
+    background-color: #000;
+}
+
+span {
+    color: #C271FF;
+}
+
+.pros {
+    padding-top: 70px;
+}
+
+@media (max-width: 577px) {}
+
+
+@media (max-width: 769px) {}
+
+/* Carousel */
+.bk-color {
+    background-color: #C271FF;
+}
+
+
+/* Most popular tutorials */
+.play-img {
+    position: absolute;
+    margin-top: 30%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.stars p {
+    color: #C271FF;
+}
+
+/* free membership */
+.free-mem {
+    background-color: #071629;
+}
+
+/* footer */
+.bg-black {
+    background-color: #071629;
+}
+
+/*  PRICING PAGE */
+/* hero section */
+
+.hero-img2 {
+    background-image: url("/images/pic_2.jpg");
+    height: 1440px;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+}
+
+/* PRICING - TABLE */
+
+.table>tbody>tr:first-child>td,
+.table>tbody>tr:first-child>th {
+    border: none;
+}
+
+.bi {
+    color: #82d24f;
+}
+
+.table tr,
+th,
+td {
+    vertical-align: middle;
+}
+
+/*  COURSES PAGE */
+
+.hero-img3 {
+    background: url('images/pic_3.jpg') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+}
+
+.highlightcolor {
+    background-color: #C271FF;
+}
+
+.iconSearch::before {
+    content: '\e912';
+}
+
+.form-control::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.616);
+    font-size: 18px;
+}
+
+#topic,
+#sortby {
+    font-size: 18px;
+    min-width: 175px;
+}
+
+.form-group .dropdown-item {
+    font-size: 14px;
+}
+
+.dropdown-menu {
+    width: 90%;
+}
+
+.input-box {
+    background-color: #d79df980;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.404);
+    min-height: 50px;
+}
+
+.form-group .dropdown-item:hover {
+    color: var(--colorpurple) !important;
+}
+
+@media screen and (max-width: 480px) {
+    .title {
+        font-size: 60px;
+    }
+
+    .img_user {
+        width: 200%;
+    }
+
+}
+
+.loader {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #C271FF;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.pink-bg {
+    background-color: #c271ff;
+    color: #c271ff;
+}
+
+#myquotes {
+    color: white;
+}
+.blackarrow-right {
+    margin-left: 250px;
+}
+.blackarrow-left {
+    margin-right: 250px;
+}
+
+.play-btn {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+}
+
+.play-btn1 {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+}
